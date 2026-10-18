@@ -1,0 +1,1209 @@
+    /* ==========================================================================
+       ETHEREAL PINK & WHITE 3D GLASS DESIGN SYSTEM WITH MOODY DARK DEPTH
+       ========================================================================== */
+    :root {
+      /* Velvet Rose-Noir / Smoky Dark Palette (Unified Continuous Luxury Canvas) */
+      --bg-noir: #090714;
+      --bg-dark-post: transparent;
+      --bg-dark-alt: #090714;
+      --bg-dark-deep: #090714;
+
+      /* Glowing Pink & White Glass Accents */
+      --pink-primary: #f472b6;
+      --pink-light: #fbcfe8;
+      --pink-vivid: #ec4899;
+      --pink-deep: #db2777;
+      --pink-glow: rgba(244, 114, 182, 0.4);
+
+      /* Ice Blue & Periwinkle Palette */
+      --blue-ice: #93c5fd;
+      --blue-soft: #bfdbfe;
+      --blue-periwinkle: #a5b4fc;
+
+      /* Pure Diamond White Highlights */
+      --white-pure: #ffffff;
+      --white-frosted: rgba(255, 255, 255, 0.94);
+      --white-dim: rgba(255, 255, 255, 0.75);
+      --text-muted: #a0aec0;
+
+      /* Metallic & Luxury Gradients */
+      --lux-gradient: linear-gradient(135deg, #ffffff 0%, #fbcfe8 32%, #f472b6 68%, #93c5fd 100%);
+      --lux-pink-gradient: linear-gradient(135deg, #ffffff 0%, #fbcfe8 35%, #f472b6 75%, #ffffff 100%);
+
+      /* Frosted Glass Slabs with Specular White Top Borders */
+      --glass-surface: rgba(255, 255, 255, 0.05);
+      --glass-surface-hover: rgba(255, 255, 255, 0.09);
+      --glass-border: rgba(255, 255, 255, 0.14);
+      --glass-border-light: rgba(255, 255, 255, 0.24);
+      --glass-border-pink: rgba(244, 114, 182, 0.42);
+      --glass-blur: blur(32px) saturate(190%);
+      --glass-specular: inset 0 1px 1px 0 rgba(255, 255, 255, 0.42), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.5);
+      --card-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.75);
+
+      /* Typography & Easing */
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-display: 'Cinzel', serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --ease-lux: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-noir);
+      color: var(--white-pure);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* Custom Luxury Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-noir);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(244, 114, 182, 0.4);
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--pink-primary);
+    }
+
+    /* Fullscreen Persistent 3D WebGL Canvas Layer */
+    #three-fullscreen-container {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.75;
+    }
+    #three-fullscreen-canvas {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Ambient Nebular Lighting Blobs */
+    .ambient-glow-mesh {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .glow-blob-pink {
+      position: absolute;
+      top: -10vh;
+      right: -10vw;
+      width: 65vw;
+      height: 65vw;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(244, 114, 182, 0.15) 0%, rgba(244, 114, 182, 0) 70%);
+      filter: blur(80px);
+      animation: floatBlob1 18s ease-in-out infinite alternate;
+    }
+    .glow-blob-blue {
+      position: absolute;
+      bottom: -15vh;
+      left: -10vw;
+      width: 60vw;
+      height: 60vw;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(147, 197, 253, 0.12) 0%, rgba(147, 197, 253, 0) 70%);
+      filter: blur(80px);
+      animation: floatBlob2 22s ease-in-out infinite alternate;
+    }
+    @keyframes floatBlob1 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(-8vw, 10vh) scale(1.15); }
+    }
+    @keyframes floatBlob2 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(8vw, -10vh) scale(1.12); }
+    }
+
+    /* ==========================================================================
+       FIXED TOP NAVIGATION (FULL SCREEN EDGE-TO-EDGE)
+       ========================================================================== */
+    .top-nav-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 24px 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      background: linear-gradient(180deg, rgba(7, 8, 20, 0.85) 0%, rgba(7, 8, 20, 0.3) 60%, transparent 100%);
+      pointer-events: auto;
+      transition: background 0.4s var(--ease-lux), box-shadow 0.4s var(--ease-lux), padding 0.3s;
+    }
+
+    /* Scrolled Navigation State */
+    .top-nav-bar.nav-scrolled {
+      background: rgba(16, 13, 24, 0.9);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border-bottom: 1px solid rgba(244, 114, 182, 0.25);
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+      padding: 18px 50px;
+    }
+
+    .brand-logo {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #fff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: color 0.3s;
+    }
+    .brand-logo span.pink-blue-gem {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink-primary), var(--blue-ice));
+      box-shadow: 0 0 12px var(--pink-primary), 0 0 6px var(--blue-ice);
+    }
+
+    /* Frosted Capsule Menu */
+    .frosted-capsule {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 999px;
+      padding: 6px 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), var(--glass-specular);
+      transition: all 0.3s var(--ease-lux);
+    }
+    .frosted-capsule a {
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      text-decoration: none;
+      padding: 7px 18px;
+      border-radius: 999px;
+      transition: all 0.3s var(--ease-lux);
+    }
+    .frosted-capsule a:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.12);
+    }
+    .frosted-capsule a.active {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.22);
+      box-shadow: 0 2px 14px rgba(244, 114, 182, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    /* Crisp Pure White Button with Bluish-Pink Glow */
+    .btn-pill-white {
+      background: #ffffff;
+      color: #070814;
+      border-radius: 999px;
+      padding: 11px 26px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      border: 1px solid transparent;
+      box-shadow: 0 4px 22px rgba(244, 114, 182, 0.35), 0 0 16px rgba(147, 197, 253, 0.25);
+      transition: all 0.3s var(--ease-lux);
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn-pill-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 34px rgba(244, 114, 182, 0.55), 0 0 24px rgba(147, 197, 253, 0.4);
+      background: #ffffff;
+      color: #05060f;
+    }
+
+    .mobile-menu-trigger {
+      display: none;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      color: #fff;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    /* ==========================================================================
+       HERO: 100% FULL-SCREEN DESKTOP MODEL FRAMING & AUTOMATIC TRANSITIONS
+       ========================================================================== */
+    .fullscreen-hero {
+      position: relative;
+      width: 100vw;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 125px 60px 55px;
+      overflow: hidden;
+      z-index: 3;
+    }
+
+    /* Soft atmospheric bottom blend connecting Home into The Sanctuary */
+    .hero-seamless-bottom-blend {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 180px;
+      background: linear-gradient(180deg, transparent 0%, rgba(9, 7, 20, 0.5) 45%, #090714 100%);
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    /* Multi-Slide Atmosphere Stage (Smooth Crossfade & Ken Burns Drift) */
+    .hero-atmosphere-stage {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .atmosphere-slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transform: scale(1.04);
+      z-index: 1;
+      transition: opacity 1.6s cubic-bezier(0.4, 0, 0.2, 1), 
+                  transform 6s cubic-bezier(0.25, 1, 0.5, 1);
+      will-change: opacity, transform;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      pointer-events: none;
+    }
+    .atmosphere-slide.active {
+      opacity: 1;
+      transform: scale(1);
+      z-index: 2;
+    }
+
+    /* Ambient blurred backdrop for each slide */
+    .slide-ambient-blur {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      filter: blur(48px) brightness(0.55) saturate(1.4);
+      transform: scale(1.15);
+      opacity: 0.65;
+      z-index: 1;
+    }
+
+    /* 
+       THE DESKTOP MODEL PORTRAIT:
+       Anchored to the right side so the model's full head, hair, eyes, lips, jawline,
+       and neck are 100% visible and uncropped on desktop widescreen displays!
+    */
+    .slide-model-portrait {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 60vw;
+      height: 100vh;
+      object-fit: cover;
+      object-position: center 12%; /* Perfect vertical breathing room for forehead & hair */
+      mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.4) 10%, rgba(0, 0, 0, 0.95) 26%, black 100%);
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.4) 10%, rgba(0, 0, 0, 0.95) 26%, black 100%);
+      z-index: 2;
+      filter: brightness(1.03) contrast(1.04) saturate(1.08);
+    }
+
+    /* Slide specific fine-tuning for focal balance */
+    .atmosphere-slide[data-index="0"] .slide-model-portrait {
+      object-position: 50% 12%;
+    }
+    .atmosphere-slide[data-index="1"] .slide-model-portrait {
+      object-position: 50% 10%;
+    }
+    .atmosphere-slide[data-index="2"] .slide-model-portrait {
+      object-position: 50% 12%;
+    }
+    /* Regal Splendor: Focuses directly on the ornate royal bridal costume and jewelry, NO trees! */
+    .atmosphere-slide[data-index="3"] .slide-model-portrait {
+      object-position: 50% 18%;
+    }
+
+    /* Delicate Left-to-Right Chiaroscuro Gradient Mask for Left Typography */
+    .hero-shadow-mask {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, #090714 0%, rgba(9, 7, 20, 0.95) 32%, rgba(9, 7, 20, 0.5) 48%, rgba(9, 7, 20, 0) 65%),
+                  linear-gradient(0deg, #090714 0%, rgba(9, 7, 20, 0.8) 18%, transparent 40%);
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    /* Center Left Hero: "Refined By Luxury" */
+    .hero-left-content {
+      position: relative;
+      z-index: 5;
+      max-width: 680px;
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.8rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--pink-light);
+      margin-bottom: 18px;
+    }
+    .hero-eyebrow span.gem-spark {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--blue-ice);
+      box-shadow: 0 0 10px var(--blue-ice);
+    }
+
+    .hero-title-giant {
+      font-family: var(--font-serif);
+      font-size: clamp(4.4rem, 8.4vw, 8.2rem);
+      line-height: 0.96;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      margin-bottom: 26px;
+      text-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+    }
+    .hero-title-giant em {
+      font-style: italic;
+      font-weight: 400;
+      background: var(--lux-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      padding-right: 6px;
+    }
+
+    .hero-cta-line {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* Atmosphere Auto-Switcher Controls with Animated Countdown Progress */
+    .atmosphere-control-dock {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .atmosphere-pills-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .atmosphere-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--pink-light);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .atmosphere-pulsar {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--pink-primary);
+      box-shadow: 0 0 10px var(--pink-primary);
+      animation: pulseAtmosphere 2s infinite ease-in-out;
+    }
+    @keyframes pulseAtmosphere {
+      0%, 100% { transform: scale(0.9); opacity: 0.6; }
+      50% { transform: scale(1.3); opacity: 1; }
+    }
+
+    .look-pill-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      color: rgba(255, 255, 255, 0.76);
+      padding: 7px 18px 9px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+    }
+    .look-pill-btn:hover {
+      color: #fff;
+      border-color: var(--pink-primary);
+      background: rgba(255, 255, 255, 0.12);
+    }
+    @keyframes pillTimerProgress {
+      0% {
+        width: 0%;
+      }
+      100% {
+        width: 100%;
+      }
+    }
+    .look-pill-btn .pill-timer-fill {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      width: 0%;
+      background: var(--lux-gradient);
+      box-shadow: 0 0 10px var(--pink-primary);
+      pointer-events: none;
+    }
+    .look-pill-btn.active {
+      background: rgba(255, 255, 255, 0.16);
+      color: #fff;
+      border-color: var(--pink-primary);
+      box-shadow: 0 0 18px rgba(244, 114, 182, 0.35);
+    }
+    .look-pill-btn.active .pill-timer-fill {
+      animation: pillTimerProgress 5000ms linear forwards;
+    }
+
+    .atmosphere-mood-caption {
+      font-size: 0.86rem;
+      color: rgba(255, 255, 255, 0.75);
+      font-weight: 300;
+      font-style: italic;
+      letter-spacing: 0.02em;
+      min-height: 22px;
+      transition: opacity 0.4s ease;
+    }
+
+    /* Bottom Row: Address Badge & Right-Corner Editorial Caption */
+    .hero-bottom-row {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      width: 100%;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .hero-location-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.88rem;
+      color: rgba(255, 255, 255, 0.88);
+      background: rgba(16, 18, 38, 0.6);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 9px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+    .hero-location-badge svg {
+      color: var(--pink-primary);
+      flex-shrink: 0;
+    }
+    .hero-location-badge a {
+      color: #fff;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .hero-editorial-caption {
+      max-width: 340px;
+      text-align: left;
+    }
+    .caption-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 6px;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .caption-title::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--blue-ice);
+      box-shadow: 0 0 8px var(--blue-ice);
+    }
+    .caption-text {
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    /* ==========================================================================
+       POST-HERO SECTIONS: VELVET ROSE-NOIR WITH PINK & WHITE 3D GLASS
+       (The requested "little dark effect" with luminous pink and white highlights)
+       ========================================================================== */
+    /* ==========================================================================
+       POST-HERO SECTIONS: SEAMLESS VELVET ROSE-NOIR FLOW (NO HARSH BORDERS)
+       (Continuous luxury experience: 3D canvas and light blooms flow across all sections)
+       ========================================================================== */
+    .post-hero-flow {
+      position: relative;
+      z-index: 3;
+      background: transparent;
+      color: var(--white-pure);
+    }
+
+    .fullscreen-section {
+      width: 100%;
+      padding: 110px 60px;
+      position: relative;
+      background: transparent;
+    }
+    .section-wrap-inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Soft, Ethereal Ambient Bridges Between Sections (Replaces all harsh border lines) */
+    .section-ambient-bridge {
+      position: relative;
+      width: 100%;
+      height: 1px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      pointer-events: none;
+      z-index: 3;
+      margin: 0 auto;
+    }
+    .section-ambient-bridge::before {
+      content: '';
+      position: absolute;
+      width: min(840px, 88vw);
+      height: 1px;
+      background: radial-gradient(ellipse at center, rgba(244, 114, 182, 0.5) 0%, rgba(255, 255, 255, 0.24) 35%, transparent 75%);
+    }
+    .section-ambient-bridge::after {
+      content: '';
+      position: absolute;
+      width: 340px;
+      height: 60px;
+      background: radial-gradient(ellipse at center, rgba(244, 114, 182, 0.14) 0%, transparent 70%);
+      filter: blur(18px);
+    }
+
+    /* Sanctuary Section (#about) */
+    .post-hero-flow #about {
+      background: radial-gradient(circle at 85% 20%, rgba(244, 114, 182, 0.09) 0%, transparent 60%),
+                  radial-gradient(circle at 15% 80%, rgba(147, 197, 253, 0.07) 0%, transparent 60%);
+      position: relative;
+    }
+    .post-hero-flow #about::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      right: -20px;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(244, 114, 182, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+      pointer-events: none;
+      filter: blur(65px);
+    }
+    .post-hero-flow #about::after {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      left: -20px;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(251, 207, 232, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
+      pointer-events: none;
+      filter: blur(55px);
+    }
+
+    /* Treatments Section (#treatments) */
+    .post-hero-flow #treatments {
+      background: radial-gradient(circle at 20% 30%, rgba(244, 114, 182, 0.08) 0%, transparent 55%),
+                  radial-gradient(circle at 80% 70%, rgba(251, 207, 232, 0.06) 0%, transparent 55%);
+      position: relative;
+    }
+
+    /* Bridal Atelier Section (#bridal) */
+    .post-hero-flow #bridal {
+      background: radial-gradient(circle at 50% 50%, rgba(244, 114, 182, 0.1) 0%, transparent 65%);
+      position: relative;
+    }
+
+    /* Split Layout */
+    .split-layout {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    /* Typography in Moody Pink & White Flow */
+    .post-hero-flow .eyebrow-label {
+      font-family: var(--font-serif);
+      font-size: 0.84rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--pink-primary);
+      font-weight: 600;
+      margin-bottom: 14px;
+      display: block;
+    }
+    .post-hero-flow .serif-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(2.6rem, 4.8vw, 4.2rem);
+      line-height: 1.1;
+      font-weight: 400;
+      color: #ffffff;
+      margin-bottom: 22px;
+    }
+    .post-hero-flow .serif-heading em {
+      font-style: italic;
+      background: var(--lux-pink-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      padding-right: 4px;
+    }
+    .post-hero-flow .lead-paragraph {
+      font-size: 1.06rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+      font-weight: 300;
+      margin-bottom: 32px;
+    }
+
+    .post-hero-flow .pink-separator-line {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(244, 114, 182, 0.5) 30%, rgba(255, 255, 255, 0.5) 70%, transparent 100%);
+      margin: 24px 0;
+    }
+
+    /* Glass Details Slab (The Sanctuary) */
+    .post-hero-flow .glass-details-slab {
+      background: var(--glass-surface);
+      border: 1px solid var(--glass-border);
+      border-top: 2px solid rgba(255, 255, 255, 0.45);
+      border-radius: 32px;
+      padding: 38px 34px;
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      box-shadow: var(--card-shadow), var(--glass-specular), 0 0 35px rgba(244, 114, 182, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+    .post-hero-flow .detail-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.95rem;
+      color: var(--white-frosted);
+    }
+    .post-hero-flow .detail-row svg {
+      color: var(--pink-primary);
+      flex-shrink: 0;
+    }
+    .post-hero-flow .detail-row b {
+      display: block;
+      font-size: 0.74rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--pink-light);
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .post-hero-flow .detail-row a {
+      color: #fff;
+      font-weight: 500;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* Vibrant Pink Action Button in The Sanctuary & Bridal */
+    .btn-pill-pink {
+      background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+      color: #ffffff;
+      border-radius: 999px;
+      padding: 13px 30px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 8px 25px rgba(236, 72, 153, 0.38);
+      transition: all 0.3s var(--ease-lux);
+      white-space: nowrap;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+    .btn-pill-pink:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 34px rgba(236, 72, 153, 0.55);
+      background: linear-gradient(135deg, #f472b6 0%, #db2777 100%);
+      color: #ffffff;
+    }
+
+    /* Services 3-Column Grid */
+    .services-3col-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .post-hero-flow .service-art-slab {
+      background: var(--glass-surface);
+      border: 1px solid var(--glass-border);
+      border-top: 2px solid rgba(244, 114, 182, 0.6);
+      border-radius: 28px;
+      padding: 40px 32px;
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      box-shadow: var(--card-shadow), var(--glass-specular);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s var(--ease-lux), border-color 0.3s, box-shadow 0.3s;
+    }
+    .post-hero-flow .service-art-slab:hover {
+      transform: translateY(-8px);
+      border-color: var(--pink-primary);
+      box-shadow: 0 30px 65px -10px rgba(244, 114, 182, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.35);
+    }
+
+    .post-hero-flow .slab-number {
+      font-family: var(--font-serif);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--pink-light);
+      font-weight: 600;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+    .post-hero-flow .slab-title {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      line-height: 1.25;
+      color: #ffffff;
+      font-weight: 400;
+      margin-bottom: 14px;
+    }
+    .post-hero-flow .slab-description {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      font-weight: 300;
+    }
+    .post-hero-flow .slab-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 28px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 400;
+    }
+    .post-hero-flow .slab-bullets li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .post-hero-flow .slab-bullets svg {
+      color: var(--pink-primary);
+      flex-shrink: 0;
+    }
+    .post-hero-flow .slab-cta-btn {
+      margin-top: auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s;
+    }
+    .post-hero-flow .slab-cta-btn:hover {
+      background: #ffffff;
+      color: #100d18;
+      border-color: #ffffff;
+      box-shadow: 0 6px 22px rgba(244, 114, 182, 0.45);
+    }
+
+    /* ==========================================================================
+       BRIDAL ATELIER: CINEMATIC CARD WITH MODEL BACKGROUND & LEFT DARK TEXT ZONE
+       (Model in Full View on Right Edge, Left side bit dark where texts are)
+       ========================================================================== */
+    .bridal-cinematic-card {
+      position: relative;
+      width: 100%;
+      min-height: 590px;
+      border-radius: 36px;
+      overflow: hidden;
+      background: #100d18;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-top: 2px solid rgba(255, 255, 255, 0.45);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      box-shadow: var(--card-shadow), var(--glass-specular), 0 0 45px rgba(244, 114, 182, 0.15);
+      display: flex;
+      align-items: center;
+    }
+
+    /* Model is the card background, anchored to the right edge in full view */
+    .bridal-card-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: right 18%;
+      z-index: 1;
+      transition: transform 6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .bridal-cinematic-card:hover .bridal-card-bg {
+      transform: scale(1.02);
+    }
+
+    /* Left is bit dark where texts are, fading smoothly to reveal the model on the right */
+    .bridal-card-shadow-mask {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, 
+        #100d18 0%, 
+        rgba(16, 13, 24, 0.98) 32%, 
+        rgba(16, 13, 24, 0.85) 45%, 
+        rgba(16, 13, 24, 0.2) 65%, 
+        transparent 82%),
+        linear-gradient(0deg, rgba(16, 13, 24, 0.5) 0%, transparent 20%, transparent 80%, rgba(16, 13, 24, 0.4) 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Left side text container - never overlaps the model on the right edge */
+    .bridal-card-content {
+      position: relative;
+      z-index: 3;
+      max-width: 580px;
+      padding: 65px 55px;
+    }
+
+    .bridal-couture-badge {
+      position: absolute;
+      bottom: 24px;
+      right: 28px;
+      background: rgba(16, 13, 24, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--pink-light);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      z-index: 4;
+    }
+    .bridal-couture-badge span.badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--pink-primary);
+      box-shadow: 0 0 8px var(--pink-primary);
+    }
+
+    .bridal-tag-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 24px 0 32px;
+    }
+    .post-hero-flow .bridal-pill-tag {
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--pink-light);
+      font-weight: 500;
+      background: rgba(244, 114, 182, 0.12);
+      border: 1px solid var(--glass-border-pink);
+      padding: 7px 18px;
+      border-radius: 999px;
+    }
+
+    /* ==========================================================================
+       FULLSCREEN FOOTER (VELVET ROSE-NOIR)
+       ========================================================================== */
+    .post-hero-flow .fullscreen-footer {
+      width: 100%;
+      padding: 70px 60px 45px;
+      background: linear-gradient(180deg, transparent 0%, rgba(5, 4, 11, 0.75) 100%);
+      position: relative;
+      z-index: 4;
+    }
+    .post-hero-flow .footer-inner-content {
+      max-width: 1320px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+    .post-hero-flow .footer-brand-side h4 {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      letter-spacing: 0.16em;
+      color: #ffffff;
+    }
+    .post-hero-flow .footer-brand-side p {
+      font-size: 0.85rem;
+      color: var(--pink-light);
+      margin-top: 4px;
+    }
+
+    /* ==========================================================================
+       FLOATING 3D GLASS WHATSAPP LOGO FOR INQUIRIES
+       ========================================================================== */
+    .floating-wa-orb {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 999;
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(37, 211, 102, 0.9) 0%, rgba(18, 140, 126, 0.98) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      box-shadow: 0 15px 35px rgba(18, 140, 126, 0.45), 0 0 25px rgba(244, 114, 182, 0.3), var(--glass-specular);
+      transition: transform 0.3s var(--ease-lux), box-shadow 0.3s;
+      text-decoration: none;
+    }
+    .floating-wa-orb:hover {
+      transform: translateY(-4px) scale(1.08);
+      box-shadow: 0 20px 45px rgba(18, 140, 126, 0.65), 0 0 35px rgba(244, 114, 182, 0.5);
+    }
+    .wa-pulsing-ring {
+      position: absolute;
+      inset: -5px;
+      border-radius: 50%;
+      border: 2px solid rgba(37, 211, 102, 0.55);
+      animation: pulseRippleRing 2.4s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+      pointer-events: none;
+    }
+    @keyframes pulseRippleRing {
+      0% { transform: scale(1); opacity: 0.85; }
+      100% { transform: scale(1.6); opacity: 0; }
+    }
+
+    /* Mobile Drawer Overlay */
+    .mobile-overlay-menu {
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 8, 20, 0.96);
+      backdrop-filter: blur(32px);
+      -webkit-backdrop-filter: blur(32px);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 28px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s var(--ease-lux);
+    }
+    .mobile-overlay-menu.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .mobile-overlay-menu a {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      letter-spacing: 0.05em;
+      color: #fff;
+      text-decoration: none;
+    }
+    .close-overlay-btn {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      background: transparent;
+      border: 1px solid var(--glass-border-light);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .fullscreen-hero {
+        padding: 110px 30px 40px;
+        min-height: 800px;
+      }
+      .slide-model-portrait {
+        width: 100vw;
+        height: 100vh;
+        object-position: center 10%;
+        mask-image: linear-gradient(0deg, #090714 15%, rgba(9, 7, 20, 0.8) 45%, transparent 80%);
+        -webkit-mask-image: linear-gradient(0deg, #090714 15%, rgba(9, 7, 20, 0.8) 45%, transparent 80%);
+      }
+      .hero-shadow-mask {
+        background: linear-gradient(0deg, #090714 0%, rgba(9, 7, 20, 0.85) 50%, rgba(9, 7, 20, 0.3) 100%);
+      }
+      .fullscreen-section {
+        padding: 80px 30px;
+      }
+      .services-3col-grid {
+        grid-template-columns: 1fr;
+      }
+      .split-layout {
+        grid-template-columns: 1fr;
+      }
+      .bridal-cinematic-card {
+        min-height: 660px;
+        align-items: flex-end;
+      }
+      .bridal-card-bg {
+        object-position: center 10%;
+      }
+      .bridal-card-shadow-mask {
+        background: linear-gradient(0deg, 
+          #100d18 0%, 
+          rgba(16, 13, 24, 0.96) 52%, 
+          rgba(16, 13, 24, 0.3) 78%, 
+          transparent 100%);
+      }
+      .bridal-card-content {
+        max-width: 100%;
+        padding: 40px 24px 30px;
+      }
+      .bridal-couture-badge {
+        bottom: auto;
+        top: 20px;
+        right: 20px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .top-nav-bar {
+        padding: 20px 24px;
+      }
+      .top-nav-bar.nav-scrolled {
+        padding: 16px 24px;
+      }
+      .brand-logo {
+        font-size: 1.05rem;
+        letter-spacing: 0.14em;
+      }
+      .frosted-capsule {
+        display: none;
+      }
+      .mobile-menu-trigger {
+        display: inline-flex;
+      }
+      .hero-title-giant {
+        font-size: 3.6rem;
+      }
+      .post-hero-flow .fullscreen-footer {
+        padding: 45px 24px 35px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .brand-logo {
+        font-size: 0.92rem;
+        letter-spacing: 0.1em;
+      }
+    }

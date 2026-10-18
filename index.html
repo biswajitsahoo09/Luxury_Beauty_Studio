@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#100d18">
+  <meta name="description" content="Mama Beauty Studio in Paradeep, Gada Nimi Dhia. Full-screen 3D luxury beauty experience with automatic atmosphere transitions, ethereal pink & white glassmorphism and moody velvet rose-noir depth. Contact: 7978931479.">
+  <title>Mama Beauty Studio | Refined By Luxury</title>
+
+  <!-- Google Fonts: High-Contrast Editorial Serif & Minimalist Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Cinzel:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Three.js for 3D WebGL Ambient Stardust & Lighting Canvas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Ambient Nebular Lighting Blobs (Bluish-Pink & Ice Blue Soft Glow) -->
+  <div class="ambient-glow-mesh" aria-hidden="true">
+    <div class="glow-blob-pink"></div>
+    <div class="glow-blob-blue"></div>
+  </div>
+
+  <!-- Persistent 3D WebGL Canvas Layer (Three.js Floating Rose/Diamond Stardust & Shimmering Lights) -->
+  <div id="three-fullscreen-container">
+    <canvas id="three-fullscreen-canvas"></canvas>
+  </div>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-overlay-menu" id="mobileDrawer">
+    <button class="close-overlay-btn" id="closeDrawer" aria-label="Close Navigation">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <a href="#home" class="mobile-item">Home</a>
+    <a href="#about" class="mobile-item">The Sanctuary</a>
+    <a href="#treatments" class="mobile-item">Treatments</a>
+    <a href="#bridal" class="mobile-item">Bridal Atelier</a>
+    <a class="btn-pill-pink" href="https://wa.me/917978931479?text=Hello%20Mama%2C%20I%20would%20like%20to%20connect%20for%20an%20appointment." target="_blank" rel="noopener">WhatsApp Concierge</a>
+  </div>
+
+  <!-- FIXED TOP NAVIGATION (FULL SCREEN EDGE-TO-EDGE) -->
+  <header class="top-nav-bar">
+    <a href="#home" class="brand-logo">
+      MAMA BEAUTY STUDIO
+      <span class="pink-blue-gem"></span>
+    </a>
+
+    <!-- Frosted Capsule Menu -->
+    <nav class="frosted-capsule">
+      <a href="#home" class="active">Home</a>
+      <a href="#about">The Sanctuary</a>
+      <a href="#treatments">Treatments</a>
+      <a href="#bridal">Bridal</a>
+    </nav>
+
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a class="btn-pill-white" href="https://wa.me/917978931479?text=Hello%20Mama%2C%20I%20would%20like%20to%20connect." target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        Connect
+      </a>
+      <button class="mobile-menu-trigger" id="openDrawer" aria-label="Open Navigation">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       HERO: 100% FULL-SCREEN WITH AUTOMATIC ATMOSPHERE TRANSITIONS
+       (Desktop Model Framing Ensures Full Face Visibility Without Cropping)
+       ========================================================================== -->
+  <main class="fullscreen-hero" id="home">
+    <!-- Multi-Slide Full-Screen Atmosphere Stage (Crossfade & Ken Burns Zoom) -->
+    <div class="hero-atmosphere-stage" id="atmosphereStage">
+      <!-- Slide 0: Rose Quartz Glow -->
+      <div class="atmosphere-slide active" data-index="0">
+        <img class="slide-ambient-blur" src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=70" alt="" aria-hidden="true">
+        <img class="slide-model-portrait" src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=2600&q=85" alt="Rose Quartz Glow Model Face">
+      </div>
+      <!-- Slide 1: Haute Editorial -->
+      <div class="atmosphere-slide" data-index="1">
+        <img class="slide-ambient-blur" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=70" alt="" aria-hidden="true">
+        <img class="slide-model-portrait" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=2600&q=85" alt="Haute Editorial Model Face">
+      </div>
+      <!-- Slide 2: Blush Bridal Aura -->
+      <div class="atmosphere-slide" data-index="2">
+        <img class="slide-ambient-blur" src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=1200&q=70" alt="" aria-hidden="true">
+        <img class="slide-model-portrait" src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=2600&q=85" alt="Blush Bridal Aura Model Face">
+      </div>
+      <!-- Slide 3: Regal Splendor (Highlights Royal Bridal Costume & Jewelry - NO trees!) -->
+      <div class="atmosphere-slide" data-index="3">
+        <img class="slide-ambient-blur" src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1200&q=70" alt="" aria-hidden="true">
+        <img class="slide-model-portrait" src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=2600&q=85" alt="Regal Splendor Royal Bridal Costume & Jewelry" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=2600&q=85';">
+      </div>
+    </div>
+
+    <!-- Soft Left Gradient Mask for Typography Legibility -->
+    <div class="hero-shadow-mask"></div>
+
+    <!-- Center Left Hero: "Refined By Luxury" -->
+    <div class="hero-left-content">
+      <div class="hero-eyebrow">
+        <span class="gem-spark"></span>
+        Paradeep Haute Aesthetics
+      </div>
+      <h1 class="hero-title-giant">
+        Refined<br>
+        By <em>Luxury</em>
+      </h1>
+      
+      <div class="hero-cta-line">
+        <a class="btn-pill-white" href="https://wa.me/917978931479?text=Hello%20Mama%2C%20I%20would%20like%20to%20inquire%20about%20your%20services." target="_blank" rel="noopener" style="padding: 14px 34px; font-size: 0.9rem;">
+          Inquire on WhatsApp
+        </a>
+      </div>
+
+      <!-- Atmosphere Auto-Switcher Controls with Animated Countdown Progress -->
+      <div class="atmosphere-control-dock">
+        <div class="atmosphere-pills-row">
+          <span class="atmosphere-label">
+            <span class="atmosphere-pulsar"></span>
+            Atmosphere:
+          </span>
+          <button class="look-pill-btn active" data-index="0" onclick="userSelectAtmosphere(0)">
+            <span>Rose Glow</span>
+            <div class="pill-timer-fill"></div>
+          </button>
+          <button class="look-pill-btn" data-index="1" onclick="userSelectAtmosphere(1)">
+            <span>Ice Editorial</span>
+            <div class="pill-timer-fill"></div>
+          </button>
+          <button class="look-pill-btn" data-index="2" onclick="userSelectAtmosphere(2)">
+            <span>Bridal Aura</span>
+            <div class="pill-timer-fill"></div>
+          </button>
+          <button class="look-pill-btn" data-index="3" onclick="userSelectAtmosphere(3)">
+            <span>Regal Splendor</span>
+            <div class="pill-timer-fill"></div>
+          </button>
+        </div>
+
+        <div class="atmosphere-mood-caption" id="atmosphereCaption">
+          Luminous glass skin, rose quartz dewy flush, and sculptural purity.
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Row: Address Badge & Right-Corner Editorial Caption -->
+    <div class="hero-bottom-row">
+      <div class="hero-location-badge">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Paradeep Garh, Nimidhi </span>
+      </div>
+
+      <div class="hero-editorial-caption">
+        <h4 class="caption-title">Beauty, Personalized Care</h4>
+        <p class="caption-text">
+          Each treatment is thoughtfully designed to highlight your natural elegance, ensuring a look that’s timeless and uniquely yours.
+        </p>
+      </div>
+    </div>
+    <!-- Seamless Atmospheric Bottom Blend -->
+    <div class="hero-seamless-bottom-blend" aria-hidden="true"></div>
+  </main>
+
+  <!-- ==========================================================================
+       POST-HERO SECTIONS: VELVET ROSE-NOIR WITH PINK & WHITE 3D GLASS
+       (Features the "little dark effect" with luminous pink and white highlights)
+       ========================================================================== -->
+  <div class="post-hero-flow">
+
+    <!-- ==========================================================================
+         SECTION: THE SANCTUARY & LOCATION
+         ========================================================================== -->
+    <section class="fullscreen-section" id="about">
+      <div class="section-wrap-inner">
+        <div class="split-layout">
+          <div>
+            <span class="eyebrow-label">The Sanctuary</span>
+            <h2 class="serif-heading">Where Elegance Meets <em>Timeless Radiance.</em></h2>
+            <div class="pink-separator-line"></div>
+            <p class="lead-paragraph">
+              Nestled in Paradeep Garh, Mama Beauty Studio is a quiet haven dedicated to pure aesthetic artistry. From customized hydra facial infusions to couture bridal transformations, every ritual is treated as an intimate celebration of your individuality.
+            </p>
+            <a class="btn-pill-pink" href="tel:7978931479">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span>Call +91 79789 31479</span>
+            </a>
+          </div>
+
+          <div class="glass-details-slab">
+            <div class="detail-row">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              <div>
+                <b>Studio Address</b>
+                <span>Paradeep Garh, Nimidhi, Jagatsinghpur, Odisha</span>
+              </div>
+            </div>
+
+            <div class="detail-row">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <div>
+                <b>WhatsApp &amp; Direct Phone</b>
+                <a href="https://wa.me/917978931479" target="_blank" rel="noopener">+91 79789 31479</a>
+              </div>
+            </div>
+
+            <div class="detail-row">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              <div>
+                <b>In-Home Service</b>
+                <span>Private doorstep service available across Paradeep Garh upon request</span>
+              </div>
+            </div>
+
+            <div class="detail-row">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <div>
+                <b>Studio Availability</b>
+                <span>10:00 AM – 8:30 PM (Daily appointments by reservation)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Seamless Ethereal Ambient Bridge -->
+    <div class="section-ambient-bridge" aria-hidden="true"></div>
+
+    <!-- ==========================================================================
+         SECTION: SOPHISTICATED SERVICES
+         ========================================================================== -->
+    <section class="fullscreen-section" id="treatments">
+      <div class="section-wrap-inner">
+        <div style="text-align: center; max-width: 720px; margin: 0 auto 50px;">
+          <span class="eyebrow-label">Curated Disciplines</span>
+          <h2 class="serif-heading">Sophisticated <em>Treatments</em></h2>
+          <p class="lead-paragraph" style="margin-bottom: 0;">
+            Immerse yourself in our signature skin, hair, and aesthetic rituals, crafted with verified premium formulations and dermatological precision.
+          </p>
+        </div>
+
+        <div class="services-3col-grid">
+          <!-- 01: Skin & Hydra Facials -->
+          <article class="service-art-slab">
+            <span class="slab-number">01 / REJUVENATION</span>
+            <h3 class="slab-title">Advanced Skin &amp; Hydra Rituals</h3>
+            <p class="slab-description">
+              Deep pore vortex cleansing, targeted moisture infusions, collagen-stimulating diamond treatments, and botanical rose glow facials.
+            </p>
+            <ul class="slab-bullets">
+              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Hydra Facial Infusions</li>
+              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Diamond &amp; Rose Petal Facials</li>
+              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Botanical De-Tan &amp; Anti-Ageing</li>
+            </ul>
+            <a class="slab-cta-btn" href="https://wa.me/917978931479?text=Hello%20Mama%2C%20I%20would%20like%20to%20inquire%20about%20Hydra%20Facials." target="_blank" rel="noopener">Inquire on WhatsApp</a>
+          </article>
+
+          <!-- 02: Couture Makeup -->
+          <article class="service-art-slab">
+            <span class="slab-number">02 / ARTISTRY</span>
+            <h3 class="slab-title">Couture Makeup &amp; Glamour</h3>
+            <p class="slab-description">
+              Sculpted High-Definition and Airbrush makeup designed for high-profile celebrations, engagements, and evening galas.
+            </p>
+            <ul class="slab-bullets">
+              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> HD Party &amp; Red Carpet Looks</li>
+              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Feather-Light Airbrushing</li>
+              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Engagement &amp; Reception Artistry</li>
+            </ul>
+            <a class="slab-cta-btn" href="https://wa.me/917978931479?text=Hello%20Mama%2C%20I%20would%20like%20to%20inquire%20about%20Makeup%20Artistry." target="_blank" rel="noopener">Inquire on WhatsApp</a>
+          </article>
+
+          <!-- 03: Hair Rituals -->
+          <article class="service-art-slab">
+            <span class="slab-number">03 / TRANSFORMATION</span>
+            <h3 class="slab-title">Hair Revival &amp; Styling</h3>
+            <p class="slab-description">
+              Deep restorative hair spas, keratin smoothening, precision architectural cuts, global color, and festive styling.
+            </p>
+            <ul class="slab-bullets">
+              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Keratin Silk Protein Infusion</li>
+              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Intensive Botanical Hair Spa</li>
+              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Precision Haircut &amp; Blow-Dry</li>
+            </ul>
+            <a class="slab-cta-btn" href="https://wa.me/917978931479?text=Hello%20Mama%2C%20I%20would%20like%20to%20inquire%20about%20Hair%20Spa%20%26%20Styling." target="_blank" rel="noopener">Inquire on WhatsApp</a>
+          </article>
+
+          <!-- 04: Nails & Foot Spa -->
+          <article class="service-art-slab">
+            <span class="slab-number">04 / WELLNESS</span>
+            <h3 class="slab-title">Nail Couture &amp; Foot Spa</h3>
+            <p class="slab-description">
+              Luxury spa manicures, deep reflexology pedicures, French styling, long-lasting gel polish, and refined bespoke nail art.
+            </p>
+            <ul class="slab-bullets">
+              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Luxury Spa Pedicure &amp; Manicure</li>
+              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Gel Polish &amp; French Nails</li>
+              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Hand &amp; Foot Pressure Massages</li>
+            </ul>
+            <a class="slab-cta-btn" href="https://wa.me/917978931479?text=Hello%20Mama%2C%20I%20would%20like%20to%20inquire%20about%20Nail%20Couture." target="_blank" rel="noopener">Inquire on WhatsApp</a>
+          </article>
+
+          <!-- 05: Body Polishing & Waxing -->
+          <article class="service-art-slab">
+            <span class="slab-number">05 / INDULGENCE</span>
+            <h3 class="slab-title">Body Wellness &amp; Polishing</h3>
+            <p class="slab-description">
+              Complete body buffing, gentle exfoliation therapies, full-body polishing, and hygienic waxing rituals for velvet skin.
+            </p>
+            <ul class="slab-bullets">
+              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Whole Body Exfoliating Polish</li>
+              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Full Body &amp; Face Waxing</li>
+              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> D-Tan Restoration Packs</li>
+            </ul>
+            <a class="slab-cta-btn" href="https://wa.me/917978931479?text=Hello%20Mama%2C%20I%20would%20like%20to%20inquire%20about%20Body%20Polishing." target="_blank" rel="noopener">Inquire on WhatsApp</a>
+          </article>
+
+          <!-- 06: Brow Mapping -->
+          <article class="service-art-slab">
+            <span class="slab-number">06 / PRECISION</span>
+            <h3 class="slab-title">Precision Brow &amp; Contouring</h3>
+            <p class="slab-description">
+              Meticulous facial threading, eyebrow mapping, and gentle hair removal designed to accent your bone structure.
+            </p>
+            <ul class="slab-bullets">
+              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Eyebrow Mapping &amp; Shaping</li>
+              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Upper Lip &amp; Chin Threading</li>
+              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Full Face Precision Finishing</li>
+            </ul>
+            <a class="slab-cta-btn" href="https://wa.me/917978931479?text=Hello%20Mama%2C%20I%20would%20like%20to%20inquire%20about%20Threading." target="_blank" rel="noopener">Inquire on WhatsApp</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seamless Ethereal Ambient Bridge -->
+    <div class="section-ambient-bridge" aria-hidden="true"></div>
+
+    <!-- ==========================================================================
+         SECTION: THE BRIDAL ATELIER (CARD WITH MODEL BACKGROUND & LEFT DARK TEXT ZONE)
+         ========================================================================== -->
+    <section class="fullscreen-section" id="bridal">
+      <div class="section-wrap-inner">
+        <div class="bridal-cinematic-card">
+          <!-- Background: Full View Model on Right Edge -->
+          <img class="bridal-card-bg" src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=2200&q=85" alt="Royal Bridal Costume, Lehenga Embroidery & Jewelry" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=2200&q=85';">
+          
+          <!-- Left is bit dark where texts are -->
+          <div class="bridal-card-shadow-mask"></div>
+
+          <!-- Left Side Content: Clean and Readable -->
+          <div class="bridal-card-content">
+            <span class="eyebrow-label">The Bridal Atelier</span>
+            <h2 class="serif-heading">Your Once-in-a-Lifetime <em>Radiant Glow.</em></h2>
+            <div class="pink-separator-line"></div>
+            <p class="lead-paragraph">
+              An immersive beauty journey from intensive multi-week pre-bridal skincare to immaculate wedding-day execution. Ornate zardozi styling, heavy kundan accents, and HD formulas engineered for 18-hour radiance.
+            </p>
+
+            <div class="bridal-tag-row">
+              <span class="bridal-pill-tag">HD &amp; Airbrush Artistry</span>
+              <span class="bridal-pill-tag">Couture Saree &amp; Lehenga Draping</span>
+              <span class="bridal-pill-tag">Venue &amp; Doorstep Privileges</span>
+            </div>
+
+            <div style="margin-top: 10px;">
+              <a class="btn-pill-pink" href="https://wa.me/917978931479?text=Hello%20Mama%2C%20I%20would%20like%20to%20schedule%20a%20Bridal%20Consultation." target="_blank" rel="noopener">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                <span>Schedule Bridal Consultation</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Couture Badge -->
+          <div class="bridal-couture-badge">
+            <span class="badge-dot"></span>
+            <span>Regal Bridal Couture</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seamless Ethereal Ambient Bridge -->
+    <div class="section-ambient-bridge" aria-hidden="true"></div>
+
+    <!-- ==========================================================================
+         FULLSCREEN FOOTER (VELVET ROSE-NOIR)
+         ========================================================================== -->
+    <footer class="fullscreen-footer">
+      <div class="footer-inner-content">
+        <div class="footer-brand-side">
+          <h4>MAMA BEAUTY STUDIO</h4>
+        </div>
+        <div>
+          Refined By Luxury · © <span id="currentYear"></span> All Rights Reserved.
+        </div>
+      </div>
+    </footer>
+
+  </div><!-- /post-hero-flow -->
+
+  <!-- FLOATING 3D GLASS WHATSAPP LOGO FOR INQUIRIES -->
+  <a href="https://wa.me/917978931479?text=Hello%20Mama%2C%20I%20would%20like%20to%20inquire%20about%20services." class="floating-wa-orb" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <div class="wa-pulsing-ring"></div>
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  </a>
+
+  <!-- ==========================================================================
+       JAVASCRIPT: AUTOMATIC ATMOSPHERE SWITCHER & THREE.JS 3D CANVAS
+       ========================================================================== -->
+  <script src="script.js"></script>
+</body>
+</html>
